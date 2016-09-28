@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alfredjin.coolweather.R;
+import com.alfredjin.coolweather.service.AutoUpdateService;
 import com.alfredjin.coolweather.util.HttpCallbackListener;
 import com.alfredjin.coolweather.util.HttpUtil;
 import com.alfredjin.coolweather.util.Utility;
@@ -117,8 +118,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
      */
 
     private void queryWeatherCode(String countryCode) {
-        String address = "http://www.weather.com.cn/data/list3/city" +
-                countryCode + ".xml";
+        String address = "http://www.weather.com.cn/data/list3/city" + countryCode + ".xml";
         queryFromServer(address, "countyCode");
     }
 
@@ -126,8 +126,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
      * 查询天气代号所对应的天气
      */
     private void queryWeatherInfo(String weatherCode) {
-        String address = "http://www.weather.com.cn/data/cityinfo/" +
-                weatherCode + ".html";
+        String address = "http://www.weather.com.cn/data/cityinfo/" + weatherCode + ".html";
         queryFromServer(address, "weatherCode");
     }
 
@@ -184,5 +183,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         currentDateText.setText(prefs.getString("current_date", ""));
         weatherInfoLayout.setVisibility(View.INVISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 }
