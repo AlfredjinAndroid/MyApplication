@@ -126,7 +126,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
      * 查询天气代号所对应的天气
      */
     private void queryWeatherInfo(String weatherCode) {
-        String address = "http://www.weather.com.cn/data/cityinfo/" + weatherCode + ".html";
+        String address = "http://m.weather.com.cn/data/" + weatherCode + ".html";
         queryFromServer(address, "weatherCode");
     }
 
